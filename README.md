@@ -1,2 +1,2 @@
 # AsyncHttpServlet
-customizable asynchronous (non-blocking proxy servlet based on MITRE ProxyServlet
+customizable asynchronous (non-blocking Java proxy servlet based on MITRE ProxyServlet
