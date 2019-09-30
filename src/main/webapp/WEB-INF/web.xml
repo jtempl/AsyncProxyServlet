@@ -1,0 +1,15 @@
+<web-app>
+  <display-name>Test AsyncProxyServlet</display-name>
+  <async-supported>true</async-supported>
+
+  <servlet>
+    <servlet-name>MyAsyncProxyServlet</servlet-name>
+    <servlet-class>com.software_templ.httpproxy.MyAsyncProxyServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>MyAsyncProxyServlet</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+</web-app>
