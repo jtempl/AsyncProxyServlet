@@ -4,7 +4,7 @@
 
   <servlet>
     <servlet-name>MyAsyncProxyServlet</servlet-name>
-    <servlet-class>com.software_templ.httpproxy.MyAsyncProxyServlet</servlet-class>
+    <servlet-class>com.software_templ.test.httpproxy.MyAsyncProxyServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
