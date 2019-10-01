@@ -1,7 +1,8 @@
 # AsyncHttpServlet
 Customizable asynchronous (non-blocking) Java proxy servlet based on MITRE ProxyServlet.
-Customization follows the MITRE ProxyServlet design, meaning that a number of properties can be configured and
-for more advanced use cases a subclass can be created that overrides some of the methds of the base class.
-The MITRE ProxyServlet is based on the Apache asynchttpclient and runs under Java 1.8.
+Customization follows the MITRE ProxyServlet design, which means that a number of properties can be configured.
+In addition, a subclass can be created that overrides some of the methods of the base class.
+In particular, getTargetUri() can be customized for dynamically computing the target of a request.
 
-Simple test have been performed under Tomcat7.
+The MITRE ProxyServlet is based on the Apache asynchttpclient and runs under Java 1.8.
+Simple tests have been carried out under Tomcat7.
