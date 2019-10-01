@@ -16,6 +16,7 @@
 
 package com.software_templ.httpproxy;
 
+import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.HttpClient;
@@ -82,10 +83,28 @@ public class AsyncProxyServlet extends ProxyServlet {
                 .setEntity(new InputStreamEntity(servletRequest.getInputStream(), servletRequest.getContentLength()))
                 .build();
         copyRequestHeaders(servletRequest, proxyRequest);
+        setXForwardedForHeader(servletRequest, proxyRequest);
+        setXForwardedForHeader(servletRequest, proxyRequest);
         HttpAsyncRequestProducer producer = HttpAsyncMethods.create(proxyRequest);
         AsyncContext asyncCtx = servletRequest.startAsync();
         AsyncByteConsumer<HttpResponse> consumer = createAsyncByteConsumer(asyncCtx);
         asyncProxyClient.execute(producer, consumer, createFutureCallback(asyncCtx, proxyRequest));
+    }
+
+    // unfortunately this method is private in the base class
+    protected void setXForwardedForHeader(HttpServletRequest servletRequest, HttpRequest proxyRequest) {
+        if (doForwardIP) {
+            String forHeaderName = "X-Forwarded-For";
+            String forHeader = servletRequest.getRemoteAddr();
+            String existingForHeader = servletRequest.getHeader(forHeaderName);
+            if (existingForHeader != null) {
+                forHeader = existingForHeader + ", " + forHeader;
+            }
+            proxyRequest.setHeader(forHeaderName, forHeader);
+            String protoHeaderName = "X-Forwarded-Proto";
+            String protoHeader = servletRequest.getScheme();
+            proxyRequest.setHeader(protoHeaderName, protoHeader);
+        }
     }
 
     @Override
