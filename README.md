@@ -6,3 +6,5 @@ In particular, getTargetUri() can be customized for dynamically computing the ta
 
 The MITRE ProxyServlet is based on the Apache asynchttpclient and runs under Java 1.8.
 Simple tests have been carried out under Tomcat7.
+
+This software is licensed under the Apache License, Version 2.0.
