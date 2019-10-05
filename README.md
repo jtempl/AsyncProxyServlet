@@ -1,4 +1,4 @@
-# AsyncHttpServlet
+# AsyncProxyServlet
 Customizable asynchronous (non-blocking) Java proxy servlet based on MITRE ProxyServlet.
 Customization follows the MITRE ProxyServlet design, which means that a number of properties can be configured.
 In addition, a subclass can be created that overrides some of the methods of the base class.
