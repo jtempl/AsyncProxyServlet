@@ -183,19 +183,28 @@ public class AsyncProxyServlet extends ProxyServlet {
 
             public void completed(final HttpResponse response) {
                 log(request, response);
-                asyncCtx.complete();
+                asyncComplete(asyncCtx);
             }
 
             public void failed(final Exception e) {
                 log("request failed: " + request.getRequestLine().toString(), e);
-                asyncCtx.complete();
+                asyncComplete(asyncCtx);
             }
 
             public void cancelled() {
                 log("request cancelled: " + request.getRequestLine());
-                asyncCtx.complete();
+                asyncComplete(asyncCtx);
             }
         };
+    }
+
+    protected void asyncComplete(AsyncContext asyncCtx) {
+        try {
+            asyncCtx.complete();
+        } catch (RuntimeException e) {
+            // an unhandled exception can stop ioReactor
+            log("cannot complete async context: ", e);
+        }
     }
 
     public void log(HttpUriRequest request, HttpResponse response) {
