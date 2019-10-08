@@ -84,11 +84,11 @@ public class AsyncProxyServlet extends ProxyServlet {
                 .build();
         copyRequestHeaders(servletRequest, proxyRequest);
         setXForwardedForHeader(servletRequest, proxyRequest);
-        setXForwardedForHeader(servletRequest, proxyRequest);
-        HttpAsyncRequestProducer producer = HttpAsyncMethods.create(proxyRequest);
+        HttpAsyncRequestProducer requestProducer = HttpAsyncMethods.create(proxyRequest);
         AsyncContext asyncCtx = servletRequest.startAsync();
-        AsyncByteConsumer<HttpResponse> consumer = createAsyncByteConsumer(asyncCtx);
-        asyncProxyClient.execute(producer, consumer, createFutureCallback(asyncCtx, proxyRequest));
+        AsyncByteConsumer<HttpResponse> responseConsumer = createAsyncByteConsumer(asyncCtx);
+        FutureCallback<HttpResponse> callback = createFutureCallback(asyncCtx, proxyRequest);
+        asyncProxyClient.execute(requestProducer, responseConsumer, callback);
     }
 
     // unfortunately this method is private in the base class
